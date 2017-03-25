@@ -4,16 +4,37 @@
         xmlns:vm="clr-namespace:DragablzTabAsView.ViewModels"
         xmlns:c="clr-namespace:DragablzTabAsView.Commands"
         xmlns:local="clr-namespace:DragablzTabAsView"
+        xmlns:dockablz="http://dragablz.net/winfx/xaml/dockablz"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
+        xmlns:views="clr-namespace:DragablzTabAsView.Views"
         Title="Main Window"
         Height="400"
         Width="800">
 
+    <Window.Resources>
+        <system:String x:Key="Partition">Partition</system:String>
+    </Window.Resources>
     <Window.DataContext>
         <vm:MainViewModel />
     </Window.DataContext>
 
-    <Grid>
-        <!-- Add additional content here -->
-    </Grid>
+    <dockablz:Layout Partition="{StaticResource Partition}">
+        <dragablz:TabablzControl Margin="8"
+                                 ConsolidateOrphanedItems="True">
+            <dragablz:TabablzControl.InterTabController>
+                <dragablz:InterTabController Partition="{StaticResource Partition}" />
+            </dragablz:TabablzControl.InterTabController>
+            <TabItem Header="FirstView">
+                <views:First/>
+            </TabItem>
+            <TabItem Header="SecondView">
+                <views:Second/>
+            </TabItem>
+            <TabItem Header="ThirdView">
+                <views:Third/>
+            </TabItem>
+        </dragablz:TabablzControl>
+    </dockablz:Layout>
 
 </Window>

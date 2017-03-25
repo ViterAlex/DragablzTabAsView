@@ -69,10 +69,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MainInterTabClient.cs" />
     <Compile Include="ViewModels\ThirdViewModel.cs" />
     <Compile Include="ViewModels\SecondViewModel.cs" />
     <Compile Include="Views\Second.xaml.cs">
       <DependentUpon>Second.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TabHostWindow.xaml.cs">
+      <DependentUpon>TabHostWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Third.xaml.cs">
       <DependentUpon>Third.xaml</DependentUpon>
@@ -125,6 +129,10 @@
     </None>
     <AppDesigner Include="Properties\" />
     <Page Include="Views\Second.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TabHostWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

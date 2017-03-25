@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
@@ -38,13 +39,16 @@ namespace DragablzTabAsView.ViewModels
             switch (i)
             {
                 case 1:
-                    Views.Add(new FirstViewModel());
+                    if (!Views.Any(x => x.GetType() == typeof(FirstViewModel)))
+                        Views.Add(new FirstViewModel());
                     break;
                 case 2:
-                    Views.Add(new SecondViewModel());
+                    if (!Views.Any(x => x.GetType() == typeof(SecondViewModel)))
+                        Views.Add(new SecondViewModel());
                     break;
                 case 3:
-                    Views.Add(new ThirdViewModel());
+                    if (!Views.Any(x => x.GetType() == typeof(ThirdViewModel)))
+                        Views.Add(new ThirdViewModel());
                     break;
             }
             OnPropertyChanged("Views");

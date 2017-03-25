@@ -19,22 +19,63 @@
         <vm:MainViewModel />
     </Window.DataContext>
 
-    <dockablz:Layout Partition="{StaticResource Partition}">
-        <dragablz:TabablzControl Margin="8"
-                                 ConsolidateOrphanedItems="True">
-            <dragablz:TabablzControl.InterTabController>
-                <dragablz:InterTabController Partition="{StaticResource Partition}" />
-            </dragablz:TabablzControl.InterTabController>
-            <TabItem Header="FirstView">
-                <views:First/>
-            </TabItem>
-            <TabItem Header="SecondView">
-                <views:Second/>
-            </TabItem>
-            <TabItem Header="ThirdView">
-                <views:Third/>
-            </TabItem>
-        </dragablz:TabablzControl>
-    </dockablz:Layout>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="Button"
+                       BasedOn="{StaticResource {x:Type Button}}">
+                    <Setter Property="HorizontalAlignment"
+                            Value="Left" />
+                    <Setter Property="Margin"
+                            Value="5" />
+                    <Setter Property="Padding"
+                            Value="5" />
+                </Style>
+            </StackPanel.Resources>
+            <Button Content="First"
+                    Command="{Binding AddViewCommand}">
+                <Button.CommandParameter>
+                    <system:Int32>1</system:Int32>
+                </Button.CommandParameter>
+            </Button>
+            <Button Content="Second"
+                    Command="{Binding AddViewCommand}">
+                <Button.CommandParameter>
+                    <system:Int32>2</system:Int32>
+                </Button.CommandParameter>
+            </Button>
+            <Button Content="Third"
+                    Command="{Binding AddViewCommand}">
+                <Button.CommandParameter>
+                    <system:Int32>3</system:Int32>
+                </Button.CommandParameter>
+            </Button>
+        </StackPanel>
+        <dockablz:Layout Partition="{StaticResource Partition}"
+                         Grid.Row="1">
+            <dragablz:TabablzControl Margin="8"
+                                     ConsolidateOrphanedItems="True"
+                                     ItemsSource="{Binding Views}">
+                <dragablz:TabablzControl.Resources>
+                    <DataTemplate DataType="{x:Type vm:FirstViewModel}">
+                        <views:First />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:SecondViewModel}">
+                        <views:Second />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:ThirdViewModel}">
+                        <views:Third />
+                    </DataTemplate>
+                </dragablz:TabablzControl.Resources>
+                <dragablz:TabablzControl.InterTabController>
+                    <dragablz:InterTabController Partition="{StaticResource Partition}" />
+                </dragablz:TabablzControl.InterTabController>
+            </dragablz:TabablzControl>
+        </dockablz:Layout>
+    </Grid>
 
 </Window>
